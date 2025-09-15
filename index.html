@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Brain Boosting Hobbies — 7-Day Challenge</title>
+<meta name="description" content="Pick from 16 brain-boosting hobbies, start a 7-day streak, and sharpen your mind with tiny daily missions." />
+<meta property="og:title" content="Brain Boosting Hobbies — 7-Day Challenge" />
+<meta property="og:description" content="Pick from 16 brain-boosting hobbies, start a 7-day streak, and sharpen your mind with tiny daily missions." />
+<meta name="theme-color" content="#0ea5e9" />
+<style>
+  :root{
+    --bg:#0b1220;--card:#0f172a;--muted:#94a3b8;--text:#e2e8f0;--brand:#22d3ee;--ok:#22c55e;--warn:#f59e0b;--danger:#ef4444;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:
+    radial-gradient(1200px 600px at 10% -10%, #1b2340 0%, transparent 60%),
+    radial-gradient(1000px 600px at 120% 10%, #0a3652 0%, transparent 60%),
+    linear-gradient(180deg,#05111d 0%, #0b1220 100%); color:var(--text);}
+  a{color:var(--brand);text-decoration:none}
+  header{position:sticky;top:0;backdrop-filter:saturate(140%) blur(8px);background-color:#0b1220cc;z-index:2;border-bottom:1px solid #1f2937}
+  .wrap{max-width:1100px;margin:0 auto;padding:20px}
+  .title{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .title h1{margin:0;font-size:clamp(20px,4vw,32px)}
+  .pill{border:1px dashed #334155;color:var(--muted);padding:6px 10px;border-radius:999px;font-size:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .card{background:linear-gradient(180deg,#0f172a,#0b1326);border:1px solid #1f2a44;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.25);padding:14px;display:flex;flex-direction:column;gap:8px}
+  .card h3{margin:0;font-size:16px}
+  .emoji{font-size:26px}
+  .muted{color:var(--muted);font-size:13px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  button{cursor:pointer;border:none;border-radius:12px;padding:10px 12px;background:#111c2f;color:#e2e8f0;transition:.15s;border:1px solid #1f2a44}
+  button:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+  .primary{background:linear-gradient(180deg,#22d3ee,#0ea5e9);color:#04121e;border:0;font-weight:700}
+  .success{background:linear-gradient(180deg,#34d399,#22c55e);color:#06160c;border:0;font-weight:700}
+  .danger{background:linear-gradient(180deg,#f87171,#ef4444);color:#2b0707;border:0;font-weight:700}
+  .tag{font-size:11px;border:1px solid #1f2a44;padding:4px 8px;border-radius:999px;color:#cbd5e1}
+  .badge{font-size:11px;background:#13223c;border:1px solid #244064;padding:4px 8px;border-radius:6px;color:#9fd8ff}
+  .kpi{display:flex;gap:10px;flex-wrap:wrap}
+  .kpi .box{background:#0f1a2e;border:1px solid #22314d;border-radius:14px;padding:10px 12px;min-width:140px}
+  .kpi .box .n{font-size:22px;font-weight:800}
+  .progress{height:10px;background:#0f1a2e;border:1px solid #1f2a44;border-radius:999px;overflow:hidden}
+  .bar{height:100%;background:linear-gradient(90deg,#22d3ee,#22c55e)}
+  .footer{opacity:.7;padding:30px 0;text-align:center}
+  .sm{font-size:12px}
+  .check{display:flex;align-items:center;gap:8px}
+  input[type="checkbox"]{width:18px;height:18px}
+  .timer{font-variant-numeric:tabular-nums}
+  .toast{position:fixed;right:16px;bottom:16px;background:#0f172a;border:1px solid #1f2a44;color:#e2e8f0;padding:12px 14px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.3);display:none}
+  .empty{border:1px dashed #334155;border-radius:12px;padding:16px;text-align:center;color:#9aa8bc}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap title">
+    <h1>🧠 Brain-Boosting Hobbies</h1>
+    <span class="pill">#BrainBoostingHobbies</span>
+    <div class="row" style="margin-left:auto">
+      <button id="shareBtn" title="Share">Share</button>
+      <button id="installBtn" class="primary" title="Install">Install</button>
+      <button id="resetBtn" class="danger" title="Reset progress">Reset</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:18px">
+  <section class="card" style="margin-bottom:14px">
+    <div class="row" style="justify-content:space-between;align-items:flex-start">
+      <div>
+        <h3 style="font-size:18px;margin-bottom:6px">Start your 7-Day Mind-Sharpener</h3>
+        <div class="muted">Pick activities you like, complete any <b>3 mini-missions</b> a day (10–20 mins each), and keep your streak alive.</div>
+        <div class="row" style="margin-top:8px">
+          <span class="badge">Daily goal: 3</span>
+          <span class="badge">Session: 10–20 mins</span>
+          <span class="badge">Offline-ready</span>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="box"><div class="muted">Current streak</div><div id="streak" class="n">0</div></div>
+        <div class="box"><div class="muted">Day</div><div id="dayN" class="n">1</div></div>
+        <div class="box" style="min-width:200px">
+          <div class="muted">7-Day Progress</div>
+          <div class="progress"><div id="pbar" class="bar" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <button id="random3" class="success">🎲 Give me 3 for today</button>
+      <button id="exportBtn">⬇️ Export progress (JSON)</button>
+      <span class="muted sm">Tips: Tap a card ➜ start timer ➜ mark done.</span>
+    </div>
+  </section>
+
+  <section class="grid" id="cards"></section>
+
+  <section class="card" style="margin-top:14px">
+    <h3>Today’s Mini-Missions</h3>
+    <div id="todayList" class="row" style="gap:10px;flex-wrap:wrap"></div>
+    <div id="emptyToday" class="empty">Click “🎲 Give me 3 for today” to auto-pick from your favorites.</div>
+  </section>
+
+  <section class="card" style="margin-top:14px">
+    <h3>Notes & Wins</h3>
+    <textarea id="journal" rows="4" placeholder="What did you learn today? Any patterns you noticed?" style="width:100%;resize:vertical;border-radius:12px;background:#0f1a2e;color:#e2e8f0;border:1px solid #1f2a44;padding:10px"></textarea>
+    <div class="row"><button id="saveJournal" class="primary">Save note</button><span class="muted sm">Your notes stay on this device.</span></div>
+  </section>
+
+  <div class="footer muted sm">10% of everything we build goes to fight hunger. Stay sharp, do good. 💙</div>
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* -------------------- DATA -------------------- */
+const HOBBIES = [
+  {id:"chess",label:"Play Chess",emoji:"♟️"},
+  {id:"sudoku",label:"Solve Sudoku",emoji:"🔢"},
+  {id:"teasers",label:"Try Brain Teasers",emoji:"🧩"},
+  {id:"board",label:"Host Strategy Boardgames",emoji:"🎲"},
+  {id:"language",label:"Practice a New Language",emoji:"🗣️"},
+  {id:"public",label:"Speak in Public",emoji:"🎙️"},
+  {id:"philo",label:"Study Philosophy",emoji:"👓"},
+  {id:"origami",label:"Fold Origami",emoji:"🦢"},
+  {id:"cross",label:"Do Crosswords",emoji:"🧠"},
+  {id:"music",label:"Play Music by Ear",emoji:"🎹"},
+  {id:"code",label:"Learn Coding Basics",emoji:"</>"},
+  {id:"rubik",label:"Solve Rubik’s Cube",emoji:"🧊"},
+  {id:"paint",label:"Paint Fine Details",emoji:"🎨"},
+  {id:"bonsai",label:"Trim Bonsai Trees",emoji:"🌿"},
+  {id:"science",label:"Experiment w/ Science Kits",emoji:"🧪"},
+  {id:"math",label:"Do Mental Math Drills",emoji:"📝"}
+];
+
+const ls = (k,v) => v===undefined ? JSON.parse(localStorage.getItem(k)||"null") : localStorage.setItem(k,JSON.stringify(v));
+const state = ls("bbh_state") || {favorites:[],journal:"",streak:0,day:1,progress:0,doneToday:[],today:[]};
+
+/* -------------------- UI BUILD -------------------- */
+const cardsEl = document.getElementById("cards");
+const todayList = document.getElementById("todayList");
+const emptyToday = document.getElementById("emptyToday");
+const streakEl = document.getElementById("streak");
+const dayNEl = document.getElementById("dayN");
+const pbar = document.getElementById("pbar");
+const toast = document.getElementById("toast");
+
+function fmtMin(sec){const m=Math.floor(sec/60),s=sec%60;return `${m}:${String(s).padStart(2,"0")}`}
+
+function cardTemplate(h){
+  const isFav = state.favorites.includes(h.id);
+  return `
+    <article class="card" data-id="${h.id}">
+      <div class="row" style="justify-content:space-between">
+        <div class="row"><div class="emoji" aria-hidden="true">${h.emoji}</div><h3>${h.label}</h3></div>
+        <span class="tag">${isFav?"Favorite":"Tap ★ to favorite"}</span>
+      </div>
+      <div class="muted">Mini-mission ideas:
+        ${h.id==="code"?"Build a 20-line website or solve a kata":
+        h.id==="public"?"Record a 60-sec talk on a concept you learned":
+        h.id==="philo"?"Read a page & write one question":
+        h.id==="sudoku"?"Finish an easy grid in <20 mins":
+        h.id==="math"?"Do 3 sets of 90-sec mental drills":
+        h.id==="music"?"Figure out a melody by ear":
+        h.id==="teasers"?"Solve 3 riddles/teasers":
+        h.id==="cross"?"Complete one crossword section":
+        h.id==="rubik"?"Practice one algorithm 10 times":
+        h.id==="language"?"10 new words + 3 sentences":
+        h.id==="origami"?"Fold 2 new shapes":
+        h.id==="paint"?"Detail a tiny area for 10 mins":
+        h.id==="science"?"Run one safe mini-experiment":
+        h.id==="bonsai"?"Prune & observe growth":
+        h.id==="board"?"Plan a strategy & teach a rule":
+        "Play 10 tactical puzzles"}
+      </div>
+      <div class="row">
+        <button class="timerBtn" aria-label="Start 10-minute timer">⏱️ 10:00</button>
+        <button class="doneBtn success" aria-label="Mark mission done for today">✔️ Done</button>
+        <button class="favBtn" aria-label="Toggle favorite">★</button>
+      </div>
+    </article>`;
+}
+
+function render(){
+  cardsEl.innerHTML = HOBBIES.map(cardTemplate).join("");
+  updateToday();
+  streakEl.textContent = state.streak;
+  dayNEl.textContent = state.day;
+  pbar.style.width = Math.min(100, Math.round((state.progress/7)*100))+"%";
+  document.getElementById("journal").value = state.journal || "";
+  attachCardEvents();
+}
+function attachCardEvents(){
+  document.querySelectorAll(".favBtn").forEach(btn=>{
+    btn.onclick = (e)=>{
+      const id = e.target.closest(".card").dataset.id;
+      const i = state.favorites.indexOf(id);
+      if(i>=0) state.favorites.splice(i,1); else state.favorites.push(id);
+      save("Toggled favorite");
+      render();
+    };
+  });
+  document.querySelectorAll(".doneBtn").forEach(btn=>{
+    btn.onclick = (e)=>{
+      const id = e.target.closest(".card").dataset.id;
+      if(!state.doneToday.includes(id)) state.doneToday.push(id);
+      const goalMet = state.doneToday.length>=3;
+      if(goalMet){
+        state.progress = Math.min(7, state.progress+1);
+        state.streak = state.streak+1;
+        state.day = Math.min(7, state.day+1);
+        state.doneToday = [];
+        state.today = [];
+        toastMsg("🔥 Daily goal met! Progress +1");
+      }else{
+        toastMsg(`Progress: ${state.doneToday.length}/3 today`);
+      }
+      save("Marked done");
+      render();
+    };
+  });
+  document.querySelectorAll(".timerBtn").forEach(btn=>{
+    btn.onclick = ()=>{
+      let sec = 10*60; btn.disabled=true;
+      const int = setInterval(()=>{
+        sec--; btn.textContent="⏱️ "+fmtMin(sec);
+        if(sec<=0){clearInterval(int); btn.textContent="✅ 10:00 done"; btn.disabled=false; vibrate([60,40,60]); toastMsg("Nice! Timer complete.");}
+      },1000);
+    };
+  });
+}
+
+function updateToday(){
+  if(state.today.length===0){ todayList.innerHTML=""; emptyToday.style.display="block"; return;}
+  emptyToday.style.display="none";
+  todayList.innerHTML = state.today.map(id=>{
+    const h = HOBBIES.find(x=>x.id===id);
+    const done = state.doneToday.includes(id);
+    return `<span class="tag" style="border-color:${done?'#14532d':'#244064'};background:${done?'#0b2a18':'#13223c'}">${h.emoji} ${h.label}${done?' • done':''}</span>`;
+  }).join("");
+}
+
+/* -------------------- ACTIONS -------------------- */
+function save(note){ ls("bbh_state",state); if(note) console.debug("[save]",note,state); }
+function toastMsg(msg){ toast.textContent=msg; toast.style.display="block"; setTimeout(()=>toast.style.display="none",1600); }
+function vibrate(p){ if(navigator.vibrate) navigator.vibrate(p); }
+
+document.getElementById("random3").onclick = ()=>{
+  const pool = (state.favorites.length? state.favorites : HOBBIES.map(h=>h.id)).slice();
+  const pick = [];
+  while(pick.length<3 && pool.length){
+    const i = Math.floor(Math.random()*pool.length);
+    pick.push(pool.splice(i,1)[0]);
+  }
+  state.today = pick; state.doneToday=[];
+  updateToday(); save("Picked daily 3"); toastMsg("🎯 3 mini-missions ready");
+};
+document.getElementById("saveJournal").onclick = ()=>{
+  state.journal = document.getElementById("journal").value.trim();
+  save("Saved journal"); toastMsg("Saved ✓");
+};
+document.getElementById("exportBtn").onclick = ()=>{
+  const blob = new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = Object.assign(document.createElement("a"),{href:url,download:"mind-sharpener-progress.json"});
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+};
+
+document.getElementById("resetBtn").onclick = ()=>{
+  if(confirm("Reset all progress?")){ localStorage.removeItem("bbh_state"); location.reload(); }
+};
+
+document.getElementById("shareBtn").onclick = async ()=>{
+  const text = `I’m doing a 7-Day Brain-Boosting Hobbies challenge. Join me and keep your mind sharp!`;
+  try{
+    if(navigator.share){ await navigator.share({title:document.title,text,url:location.href}); }
+    else{
+      await navigator.clipboard.writeText(location.href);
+      toastMsg("Link copied to clipboard");
+    }
+  }catch(e){ console.log(e); }
+};
+
+/* -------------------- PWA (manifest + SW) -------------------- */
+let deferredPrompt=null;
+window.addEventListener("beforeinstallprompt",(e)=>{e.preventDefault();deferredPrompt=e;});
+document.getElementById("installBtn").onclick=async()=>{
+  if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null}
+  else toastMsg("Use your browser menu to Add to Home Screen");
+};
+
+// Create a minimal manifest on the fly (no extra files needed)
+const manifest = {
+  "name":"Brain Boosting Hobbies",
+  "short_name":"Mind Sharpener",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#0b1220",
+  "theme_color":"#0ea5e9",
+  "icons":[
+    {"src":"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 160 160\"><rect width=\"160\" height=\"160\" rx=\"24\" fill=\"#0ea5e9\"/><text x=\"50%\" y=\"54%\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\" font-size=\"86\" fill=\"#04121e\">🧠</text></svg>'),"sizes":"160x160","type":"image/svg+xml","purpose":"any"}
+  ]
+};
+const manifestBlob = new Blob([JSON.stringify(manifest)],{type:"application/json"});
+const manifestURL = URL.createObjectURL(manifestBlob);
+const link = document.createElement("link"); link.rel="manifest"; link.href=manifestURL; document.head.appendChild(link);
+
+// Service worker (offline cache)
+if("serviceWorker" in navigator){
+  const swCode = `
+    const CACHE = "bbh-v1";
+    const ASSETS = ["./"];
+    self.addEventListener("install", e=>{
+      e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));
+    });
+    self.addEventListener("activate", e=>{
+      e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
+      self.clients.claim();
+    });
+    self.addEventListener("fetch", e=>{
+      const url = new URL(e.request.url);
+      if(e.request.method!=="GET"){ return; }
+      e.respondWith(
+        caches.match(e.request).then(res=> res || fetch(e.request).then(net=>{
+          const clone = net.clone();
+          caches.open(CACHE).then(c=>c.put(e.request, clone));
+          return net;
+        }).catch(()=>caches.match("./")))
+      );
+    });
+  `;
+  const swBlob = new Blob([swCode],{type:"text/javascript"});
+  const swURL = URL.createObjectURL(swBlob);
+  navigator.serviceWorker.register(swURL).catch(console.error);
+}
+
+/* -------------------- INIT -------------------- */
+render();
+</script>
+</body>
+</html>
